@@ -1,13 +1,9 @@
-import React from 'react';
-import { BasketItem } from "./BasketItem";
+import { BasketItem } from "./BasketItem"
 
-export const Basket = ({ items, addItem, delItem, removeItem, applySale, hasUsedSale }) => {
+export const Basket = ({ items, addItem, delItem, removeItem,total }) => {
     return (
         <div>
             <h3>Basket</h3>
-            {!hasUsedSale && items.length > 0 && (
-                <button className="sale" onClick={applySale}>Apply Sale</button>
-            )}
             <table>
                 <thead>
                     <tr>
@@ -20,16 +16,11 @@ export const Basket = ({ items, addItem, delItem, removeItem, applySale, hasUsed
                 </thead>
                 <tbody>
                     {items.map(elm => (
-                        <BasketItem
-                            key={elm.id}
-                            {...elm}
-                            addItem={addItem}
-                            delItem={delItem}
-                            removeItem={removeItem}
-                        />
+                        <BasketItem key={elm.id} {...elm} addItem={addItem} delItem={delItem} removeItem={removeItem} />
                     ))}
                 </tbody>
             </table>
+            <h4>Total: {total}</h4>
         </div>
-    );
-};
+    )
+}
