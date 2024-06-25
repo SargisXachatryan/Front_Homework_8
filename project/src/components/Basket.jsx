@@ -1,6 +1,15 @@
-import { BasketItem } from "./BasketItem"
+import { useContext, useEffect } from "react";
+import { BasketContext } from "../BasketContext";
+import { BasketItem } from "./BasketItem";
 
-export const Basket = ({ items, addItem, delItem, removeItem,total }) => {
+export const Basket = () => {
+    const { state, dispatch } = useContext(BasketContext);
+    const { basket, total } = state;
+
+    useEffect(() => {
+        dispatch({ type: "TOTAL" });
+    }, [basket, dispatch]);
+
     return (
         <div>
             <h3>Basket</h3>
@@ -15,8 +24,8 @@ export const Basket = ({ items, addItem, delItem, removeItem,total }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map(elm => (
-                        <BasketItem key={elm.id} {...elm} addItem={addItem} delItem={delItem} removeItem={removeItem} />
+                    {basket.map(elm => (
+                        <BasketItem key={elm.id} {...elm} />
                     ))}
                 </tbody>
             </table>
